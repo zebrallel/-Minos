@@ -1,0 +1,12 @@
+{
+  "name": "Minos",
+  "version": "1.0.0",
+  "description": "A koa server",
+  "main": "index.js",
+  "repository": "git@github.com:zebrallel/Minos.git",
+  "author": "xuxuejian <jearbilove@yeah.net>",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.4.1"
+  }
+}
