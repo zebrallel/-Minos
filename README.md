@@ -1,1 +1,3 @@
 # Minos
+
+A Koa server

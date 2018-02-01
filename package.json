@@ -6,7 +6,13 @@
   "repository": "git@github.com:zebrallel/Minos.git",
   "author": "xuxuejian <jearbilove@yeah.net>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "dependencies": {
-    "koa": "^2.4.1"
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "leancloud-storage": "^3.5.0"
   }
 }
