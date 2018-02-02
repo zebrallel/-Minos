@@ -7,7 +7,7 @@
   "author": "xuxuejian <jearbilove@yeah.net>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon src/app.js"
   },
   "dependencies": {
     "koa": "^2.4.1",
