@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Minos</title>
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" name="viewport">
+    {{#block "head"}}
+        {{#block "style"}}{{/block}} 
+        {{#each css}}
+            <link rel="stylesheet" href="{{this}}" type="text/css">
+        {{/each}}
+    {{/block}}
+</head>
+<body>
+    {{#block "body"}}{{/block}}
+    {{#each openjs}}
+        <script src="{{this}}"></script> 
+    {{/each}}
+    {{#each js}}
+        <script src="{{this}}"></script> 
+     {{/each}}
+    {{#block "script"}}
+    {{/block}}
+</body>
+</html>

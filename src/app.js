@@ -1,39 +1,45 @@
 const Koa = require('koa')
 const app = new Koa()
-const bodyParser = require('koa-bodyparser')
-const logger = require('./modules/logger')
+const convert = require('koa-convert')
 const initStorage = require('./modules/storage')
+const hbs = require('koa-hbs')
 
-// 初始化存储服务
+const port = process.env.PORT || 4000
+
+// init storage service
 app.AV = initStorage()
 
-app.use(bodyParser())
-app.use(logger)
+// access log
+app.use(async (ctx, next) => {
+    const date = new Date().toLocaleString()
 
-const Counter = () => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve('WFT?')
-        }, 3000)
+    console.log(`[${date}]:::${ctx.method}:::${ctx.url}:::${ctx.querystring}`)
+
+    await next()
+})
+
+// init view engine
+app.use(
+    hbs.middleware({
+        viewPath: `${__dirname}/views`
     })
-}
+)
 
+// final router
 app.use(async ctx => {
-    if (ctx.url === '/api/test') {
-        console.log(111)
-        const res = await Counter()
-        console.log(123)
-        console.log(res)
-        ctx.body = 'success!'
-    } else {
-        ctx.body = '404!'
+    switch (ctx.method.toLowerCase()) {
+        case 'get':
+            await ctx.render('pages/404')
+            break
+        case 'post':
+            ctx.body = { code: -1, message: 'request path can not match!' }
+            break
     }
 })
 
-app.on('error', err => {
-    console.log.error(err)
+app.listen(port, '127.0.0.1', null, () => {
+    console.log(`Server is running on ${port}`)
 })
 
-app.listen(3000, '127.0.0.1', null, () => {
-    console.log('Kow server is running on 3000!')
-})
+//TODO
+// 1. logs
