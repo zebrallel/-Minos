@@ -3,17 +3,22 @@ const app = new Koa()
 const convert = require('koa-convert')
 const initStorage = require('./modules/storage')
 const hbs = require('koa-hbs')
+const rootRouter = require('./routes')
+const bodyParser = require('koa-bodyparser')
 
 const port = process.env.PORT || 4000
 
 // init storage service
 app.AV = initStorage()
 
+app.use(bodyParser())
+
 // access log
 app.use(async (ctx, next) => {
     const date = new Date().toLocaleString()
+    const body = ctx.method.toLowerCase() === 'get' ? ctx.querystring : JSON.stringify(ctx.request.body)
 
-    console.log(`[${date}]:::${ctx.method}:::${ctx.url}:::${ctx.querystring}`)
+    console.log(`[${date}]:::${ctx.method}:::${ctx.url}:::${body}`)
 
     await next()
 })
@@ -24,6 +29,10 @@ app.use(
         viewPath: `${__dirname}/views`
     })
 )
+
+// router entry
+app.use(rootRouter.routes())
+app.use(rootRouter.allowedMethods())
 
 // final router
 app.use(async ctx => {

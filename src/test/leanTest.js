@@ -45,16 +45,11 @@ async function read(id) {
 // })
 
 async function update(id){
-    const query = new AV.Query('TodoModel')
     const tm = AV.Object.createWithoutData('TodoModel', id)
-    const res = await query.get(id)
-    const prev = res.get('todos')
-    prev.push({
-        content: 'abc',
-        completed: false
-    })
-    tm.set('todos', prev)
-    tm.save()
+
+    tm.set('completed', true)
+    console.log(tm);
+    await tm.save()
 }
 
-update('5a73fc65d50eee00771552da')
+update('5a76e4c3ee920a0045e3af0a')
