@@ -4,7 +4,6 @@ const todosRouter = require('./todos')
 
 router.all('*', async (ctx, next) => {
     if (ctx.app.env === 'dev') {
-        console.log(123);
         ctx.response.set('Access-Control-Allow-Origin', '*')
         ctx.response.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
     }
