@@ -8,9 +8,6 @@ const bodyParser = require('koa-bodyparser')
 
 const port = process.env.PORT || 4000
 
-// init storage service
-app.AV = initStorage()
-
 app.use(bodyParser())
 
 // access log

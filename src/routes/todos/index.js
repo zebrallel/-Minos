@@ -1,9 +1,10 @@
 const Router = require('koa-router')
 const router = new Router()
+const AV = require('../../modules/storage')
 
 router.post('/save', async (ctx, next) => {
     const { date, content } = ctx.request.body
-    const TodoModel = ctx.app.AV.Object.extend('TodoModel')
+    const TodoModel = AV.Object.extend('TodoModel')
     const item = new TodoModel()
 
     item.set('date', date)
@@ -21,7 +22,7 @@ router.post('/save', async (ctx, next) => {
 
 router.get('/query/:year-:month-:day', async (ctx, next) => {
     const { year, month, day } = ctx.params
-    const dateQuery = new ctx.app.AV.Query('TodoModel')
+    const dateQuery = new AV.Query('TodoModel')
 
     dateQuery.equalTo('date', `${year}-${month}-${day}`)
 
@@ -46,7 +47,7 @@ router.get('/query/:year-:month-:day', async (ctx, next) => {
 
 router.post('/update', async (ctx, next) => {
     const { id, content, date, completed } = ctx.request.body
-    const todo = ctx.app.AV.Object.createWithoutData('TodoModel', id)
+    const todo = AV.Object.createWithoutData('TodoModel', id)
 
     todo.set('content', content)
     todo.set('completed', completed === 'true')
