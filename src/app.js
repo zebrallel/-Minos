@@ -1,7 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
-const convert = require('koa-convert')
-const initStorage = require('./modules/storage')
+// const initStorage = require('./modules/storage')
 const hbs = require('koa-hbs')
 const rootRouter = require('./routes')
 const bodyParser = require('koa-bodyparser')
